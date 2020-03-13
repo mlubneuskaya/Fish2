@@ -1,12 +1,12 @@
 package com.fish2;
 import java.util.Random;
 
-public class coldFish implements Fish {
+public class northernFish implements Fish {
     private Random random = new Random();
     private int lowestTemperature;
     private int highestTemperature;
 
-    coldFish(){
+    northernFish(){
         lowestTemperature = 5;
         highestTemperature = 20;
     }
