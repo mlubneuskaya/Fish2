@@ -5,16 +5,24 @@ import javax.swing.*;
 public class Gui extends JFrame{
 
     public static void main(String[] args){
+        tropicalFish tropicalFish = new tropicalFish();
+        northernFish northernFish = new northernFish();
         Environment environment = new Environment();
-        Gui gui = new Gui(environment);
+        Gui gui = new Gui(environment, tropicalFish, northernFish);
     }
-    private Gui(Environment environment){
+    private Gui(Environment environment, tropicalFish tropicalFish, northernFish northernFish){
         setSize(500, 250);
         setLayout(null);
-        JTextArea coldFishTextArea = makeTextArea(10, 100, 80, 30, "");
-        JTextArea warmFishTextArea = makeTextArea(10, 50, 80, 30, "");
-        JButton coldFishButton = makeButton(100, 100, 80, 30, "add");
-        JButton warmFishButton = makeButton(100, 50, 80, 30, "add");
+        JTextArea northernFishTextArea = makeTextArea(10, 100, 80, 30, "0");
+        JTextArea tropicalFishTextArea = makeTextArea(10, 50, 80, 30, "0");
+        JButton northernFishButton = makeButton(100, 100, 140, 30, "add tropical fish");
+        northernFishButton.addActionListener(e -> {
+            northernFishTextArea.setText(northernFish.getNumber());
+        });
+        JButton tropicalFishButton = makeButton(100, 50, 140, 30, "add northern fish");
+        tropicalFishButton.addActionListener(e -> {
+            tropicalFishTextArea.setText(tropicalFish.getNumber());
+        });
         JTextArea environmentArea = makeTextArea(10, 10, 200, 30,
                 (environment.getTemperature()).toString());
         JButton changeButton = makeButton(250, 10, 200, 30, "change temperature");
@@ -22,10 +30,10 @@ public class Gui extends JFrame{
             environment.changeEnvironment();
             environmentArea.setText(environment.getTemperature().toString());
         });
-        getContentPane().add(coldFishTextArea);
-        getContentPane().add(warmFishTextArea);
-        getContentPane().add(warmFishButton);
-        getContentPane().add(coldFishButton);
+        getContentPane().add(northernFishTextArea);
+        getContentPane().add(tropicalFishTextArea);
+        getContentPane().add(tropicalFishButton);
+        getContentPane().add(northernFishButton);
         getContentPane().add(changeButton);
         getContentPane().add(environmentArea);
         setVisible(true);
