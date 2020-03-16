@@ -1,5 +1,4 @@
 package com.fish2;
-import java.util.Random;
 
 public class northernFish implements Fish {
     private final Environment environment;
@@ -14,10 +13,6 @@ public class northernFish implements Fish {
     }
     @Override
     public void run() {
-        living();
-    }
-
-    private void living(){
         northernFishNumber++;
         System.out.println("thread started. number of fish is "+ northernFishNumber);
         while(checkIfAlive(environment.getTemperature())){
@@ -32,6 +27,7 @@ public class northernFish implements Fish {
         northernFishNumber--;
         System.out.println("dead");
     }
+
 
     @Override
     public boolean checkIfAlive(int temperature) {
