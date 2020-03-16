@@ -2,24 +2,41 @@ package com.fish2;
 import java.util.Random;
 
 public class northernFish implements Fish {
-    private Random random = new Random();
+    private final Environment environment;
     private int lowestTemperature;
     private int highestTemperature;
     private static Integer northernFishNumber = 0;
 
-    northernFish(){
+    northernFish(Environment environment){
+        this.environment = environment;
         lowestTemperature = 5;
         highestTemperature = 20;
     }
     @Override
     public void run() {
-        northernFishNumber++;
+        living();
     }
+
+    private void living(){
+        northernFishNumber++;
+        System.out.println("thread started. number of fish is "+ northernFishNumber);
+        while(checkIfAlive(environment.getTemperature())){
+            synchronized (environment) {
+                try {
+                    environment.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        northernFishNumber--;
+        System.out.println("dead");
+    }
+
     @Override
     public boolean checkIfAlive(int temperature) {
-        return (lowestTemperature < temperature) && (temperature < highestTemperature);
+        return (lowestTemperature <= temperature) && (temperature <= highestTemperature);
     }
-    public int getHighestTemperature() {return highestTemperature;}
-    public int getLowestTemperature(){return lowestTemperature;}
+
     public String getNumber(){return northernFishNumber.toString();}
 }

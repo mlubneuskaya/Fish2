@@ -2,7 +2,7 @@ package com.fish2;
 
 import java.util.Random;
 
-public class Environment {
+class Environment {
     private Random random = new Random();
     private int temperature;
 
@@ -10,7 +10,9 @@ public class Environment {
 
     Integer getTemperature(){return temperature;}
 
-    void changeEnvironment(){
+    synchronized void changeEnvironment(){
         temperature = random.nextInt(20)+5;
+        this.notifyAll();
+        System.out.println("noootify");
     }
 }
