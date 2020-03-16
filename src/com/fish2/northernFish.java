@@ -14,7 +14,6 @@ public class northernFish implements Fish {
     @Override
     public void run() {
         northernFishNumber++;
-        System.out.println("thread started. number of fish is "+ northernFishNumber);
         while(checkIfAlive(environment.getTemperature())){
             synchronized (environment) {
                 try {
@@ -25,7 +24,6 @@ public class northernFish implements Fish {
             }
         }
         northernFishNumber--;
-        System.out.println("dead");
     }
 
 
@@ -34,5 +32,5 @@ public class northernFish implements Fish {
         return (lowestTemperature <= temperature) && (temperature <= highestTemperature);
     }
 
-    public String getNumber(){return northernFishNumber.toString();}
+    String getNumber(){return northernFishNumber.toString();}
 }

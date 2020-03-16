@@ -10,7 +10,7 @@ public class Gui extends JFrame{
 
     public static void main(String[] args){
         Environment environment = new Environment();
-        tropicalFish tropicalFish = new tropicalFish();
+        tropicalFish tropicalFish = new tropicalFish(environment);
         northernFish northernFish = new northernFish(environment);
         Gui gui = new Gui(environment, tropicalFish, northernFish);
     }
@@ -34,6 +34,12 @@ public class Gui extends JFrame{
 
         JButton tropicalFishButton = makeButton(100, 50, 140, 30, "add tropical fish");
         tropicalFishButton.addActionListener(e -> {
+            new Thread(new tropicalFish(environment)).start();
+            try {
+                sleep(100);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             tropicalFishTextArea.setText(tropicalFish.getNumber());
         });
 
@@ -45,6 +51,7 @@ public class Gui extends JFrame{
                 environment.changeEnvironment();
                 environmentArea.setText(environment.getTemperature().toString());
                 northernFishTextArea.setText(northernFish.getNumber());
+                tropicalFishTextArea.setText(tropicalFish.getNumber());
         });
 
         getContentPane().add(northernFishTextArea);

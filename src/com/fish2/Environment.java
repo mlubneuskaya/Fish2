@@ -13,6 +13,5 @@ class Environment {
     synchronized void changeEnvironment(){
         temperature = random.nextInt(20)+5;
         this.notifyAll();
-        System.out.println("noootify");
     }
 }
