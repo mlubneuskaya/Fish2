@@ -1,8 +1,6 @@
 package com.fish2;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.Thread.sleep;
 
@@ -12,7 +10,7 @@ public class Gui extends JFrame{
         Environment environment = new Environment();
         tropicalFish tropicalFish = new tropicalFish(environment);
         northernFish northernFish = new northernFish(environment);
-        Gui gui = new Gui(environment, tropicalFish, northernFish);
+        new Gui(environment, tropicalFish, northernFish);
     }
 
     private Gui(Environment environment, tropicalFish tropicalFish, northernFish northernFish){

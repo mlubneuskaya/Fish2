@@ -26,7 +26,6 @@ public class northernFish implements Fish {
         northernFishNumber--;
     }
 
-
     @Override
     public boolean checkIfAlive(int temperature) {
         return (lowestTemperature <= temperature) && (temperature <= highestTemperature);
